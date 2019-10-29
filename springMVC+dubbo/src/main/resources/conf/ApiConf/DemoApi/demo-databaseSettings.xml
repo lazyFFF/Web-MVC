@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<!--set up connection parameters-->
+	<bean name="demoDsR" class="com.alibaba.druid.pool.DruidDataSource"  init-method="init" destroy-method="close" scope="singleton">
+		<property name="url" value="jdbc:mysql://yourAddress:yourPort/yourDatabase?characterEncoding=UTF-8" />
+		<property name="username" value="yourUsername" />
+		<property name="password" value="yourPassword" />
+	</bean>
+
+	<bean id="demoDs" class="club.lazycoding.util.database.ApiRoutingDataSource">
+		<property name="targetDataSources">  
+        	<map key-type="java.lang.String">  
+            	<entry key="write" value-ref="demoDsR"/>
+            	<entry key="read" value-ref="demoDsR"/>
+          	</map>  
+        </property>  
+        <property name="defaultTargetDataSource" ref="demoDsR"/>
+	</bean>
+</beans>

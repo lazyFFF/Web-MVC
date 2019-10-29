@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mybaits-spring="http://mybatis.org/schema/mybatis-spring"
+	   xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.2.xsd
+            http://mybatis.org/schema/mybatis-spring
+     		http://mybatis.org/schema/mybatis-spring.xsd">
+
+	<context:component-scan base-package="DemoApi" />
+	<import resource="classpath:conf/ApiConf/DemoApi/demo-databaseSettings.xml" />
+
+	<!-- Mybatis -->
+	<bean id="demoSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations">
+			<array>
+				<value>classpath*:Mapper/DemoApi/*.xml</value>
+			</array>
+		</property>
+		<property name="dataSource" ref="demoDs" />
+		<property name="configLocation" value="classpath:conf/ApiConf/DemoApi/demo-mybatis-settings.xml" />
+	</bean>
+	<mybaits-spring:scan base-package="DemoApi.dao" factory-ref="demoSqlSessionFactory" />
+
+	<bean id="demoTransactionManager" class="club.lazycoding.util.database.ApiRoutingDataSourceTransactionManager">
+		<property name="dataSource" ref="demoDs" />
+	</bean>
+	<mybaits-spring:scan base-package="DemoApi.dao" factory-ref="demoSqlSessionFactory" />
+
+	<bean id="demoApi" class="DemoApi.api.impl.DemoApiImpl" />
+	<bean id="demoService" class="club.lazycoding.Impl.service.DemoService"></bean>
+    <bean id="demoModel" class="DemoApi.model.DemoModel"></bean>
+</beans>
