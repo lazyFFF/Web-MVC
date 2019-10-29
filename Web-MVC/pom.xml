@@ -33,17 +33,6 @@
             <version>1.1.20</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.apache.dubbo</groupId>-->
-            <!--<artifactId>dubbo</artifactId>-->
-            <!--<version>2.7.0</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>dubbo-rpc-api</artifactId>-->
-            <!--<version>2.6.1</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -268,13 +257,6 @@
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-juli</artifactId>
             <version>7.0.57</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.zookeeper</groupId>
-            <artifactId>zookeeper</artifactId>
-            <version>3.4.5</version>
-            <type>pom</type>
         </dependency>
 
 
